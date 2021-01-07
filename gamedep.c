@@ -58,3 +58,14 @@ bool existe(login player)
         fclose(f);
         return sign;
 }
+int login(login player)
+{
+    FILE *f = fopen("C:\\Users\\vulture\\source\\repos\\Project5\\rsc\\user.bin", "rb");
+    if (!f)
+    {
+        printf("Erreur 404 XD\n");
+        exit(0);
+    }
+    else
+        return existe(player);
+}
