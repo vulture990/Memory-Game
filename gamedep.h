@@ -37,7 +37,7 @@ typedef struct
     int nombre_time;
     int score;
 }game_parameters;
-int empty(char *filename, char *mode) ;
+int empty(char *path, char *mode) ;
 bool existe(login player) ;
 int Signup(signup user);
 int Login(login user);
