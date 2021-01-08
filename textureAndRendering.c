@@ -108,6 +108,7 @@ enumOfButtons renderMenu(SDL_Renderer* renderer)
 		render(r, renderer);
 		return Signup_Confirmed;
 	}
+	free(r);
 	else
 	{
 		return No_Clicks;
