@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <SDL.h>
+#include "textureAndRendering.h"
+#define inputedStateUsername 0
+#define inputedStatePassword 1
+
 //Afin de collecter les info d' utlisateur comme input et crée un compte
 typedef struct
 {
@@ -18,16 +22,16 @@ typedef struct
 	double score;
 }login;
 //le status du jeu 
-struct game_status
+struct gameStatus
 {
 	bool etat;
 };
 //parametre du menu du jeu
 typedef struct
 {
-	int click;
-	int select;
-	int input_state;
+	enumOfButtons isClicked;
+	enumOfButtons select;
+	int state;
 }menu;
 //game parametre
 typedef struct
@@ -39,6 +43,6 @@ typedef struct
 	int score;
 }game_parameters;
 int empty(char *path, char *mode);
-bool existe(login player);
+bool exist(login player);
 bool Signup(signup user);
 bool Login(login user);
