@@ -2,6 +2,7 @@
 #include <stdbool.h> 
 #include <stdio.h>
 #include <gtk/gtk.h>
+#include <string.h>
     
 GtkBuilder* builder;
 
