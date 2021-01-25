@@ -18,7 +18,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lm -O0 -Wall -Werror -fdump-rtl-expand")
 set(HEADERS_FOLDER include)
 include_directories(${HEADERS_FOLDER})
 
-set(SRC  extra.c main.c spices.c)
+set(SRC  menu.c main.c)
 # Add an executable compiled from hello.c
 ADD_EXECUTABLE(main ${SRC})
 
