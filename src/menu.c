@@ -19,6 +19,8 @@ GtkWidget* button3;
 GtkWidget* button4;
 GtkWidget* button5;
 GtkWidget* button7;
+GtkWidget* button8;
+GtkWidget* button77;
 
 FILE *fp;
 
@@ -91,6 +93,7 @@ bool exist(login player,char* filename,char* mode)
       fclose(fp);
     }
   }
+  free(user);
 }
 
 
@@ -109,11 +112,13 @@ void LOGin(GtkWidget *Widget, gpointer data)//pass login struct ppointer as data
   {
     printf("he is signed comfirmed");
     fclose(fp);
+    free(userr);
   }  
   else
   {
     printf("he is not signed in");
     fclose(fp);
+    free(userr);
   }
 }
 
@@ -131,6 +136,7 @@ bool isSigned(login player)
     player.getAcessToPlay=true;
 		return exist(player,"user.bin","rb");
   }
+  
 }
 
 void LOGIN(GtkButton *button, gpointer data)
@@ -145,12 +151,12 @@ void LOGIN(GtkButton *button, gpointer data)
 void menu(void)
 {
 
-builder=gtk_builder_new_from_file ("./src/memorygame.glade");
+builder=gtk_builder_new_from_file ("./src/memorygame2.glade");
 
-window=GTK_WIDGET(gtk_builder_get_object(builder,"window"));
+window=GTK_WIDGET(gtk_builder_get_object(builder,"window1"));
 
 window2=GTK_WIDGET(gtk_builder_get_object(builder,"window2"));
-window3=GTK_WIDGET(gtk_builder_get_object(builder,"window4"));
+window3=GTK_WIDGET(gtk_builder_get_object(builder,"window3"));
 
 
 button1=GTK_WIDGET(gtk_builder_get_object(builder,"Login"));
@@ -159,35 +165,36 @@ button2=GTK_WIDGET(gtk_builder_get_object(builder,"Sign Up"));
 
 button3=GTK_WIDGET(gtk_builder_get_object(builder,"Top Players"));
 
-button4=GTK_WIDGET(gtk_builder_get_object(builder,"About Us"));
+button4=GTK_WIDGET(gtk_builder_get_object(builder,"Free Mode"));
 
-button5=GTK_WIDGET(gtk_builder_get_object(builder,"signup"));
+button5=GTK_WIDGET(gtk_builder_get_object(builder,"SIgn Up"));
 
-button6=GTK_WIDGET(gtk_builder_get_object(builder,"LOGIN"));
+button6=GTK_WIDGET(gtk_builder_get_object(builder,"Login2"));
 
-button7=GTK_WIDGET(gtk_builder_get_object(builder,"GOBACK"));
+button7=GTK_WIDGET(gtk_builder_get_object(builder,"GOBACKTOMENU"));
 
-
-username=GTK_WIDGET(gtk_builder_get_object(builder,"entryusername"));
-password=GTK_WIDGET(gtk_builder_get_object(builder,"entrypassword"));
-usernameLogin=GTK_WIDGET(gtk_builder_get_object(builder,"ENTRYUSERNAMELOGIN"));
-passwordLogin=GTK_WIDGET(gtk_builder_get_object(builder,"ENTRYPASSWORDPASSWORD"));
+button77=GTK_WIDGET(gtk_builder_get_object(builder,"GOBACKHOME2"));
+username=GTK_WIDGET(gtk_builder_get_object(builder,"USERNAMESIGNUP"));
+password=GTK_WIDGET(gtk_builder_get_object(builder,"PASSWORDSIGNUP"));
+usernameLogin=GTK_WIDGET(gtk_builder_get_object(builder,"USERNAMELOGIN"));
+passwordLogin=GTK_WIDGET(gtk_builder_get_object(builder,"PASSWORDLOGIN"));
 
 
 g_signal_connect(window,"destroy",G_CALLBACK(gtk_main_quit),NULL);
-
 g_signal_connect(window2,"destroy",G_CALLBACK(gtk_main_quit),NULL);
 g_signal_connect(window3,"destroy",G_CALLBACK(gtk_main_quit),NULL);
 
 gtk_entry_set_visibility (GTK_ENTRY(password),FALSE);
-gtk_entry_set_visibility (GTK_ENTRY(passwordLogin),FALSE);
-gtk_entry_set_invisible_char (GTK_ENTRY(passwordLogin),G_UNICODE_ENCLOSING_MARK);
+// gtk_entry_set_visibility (GTK_ENTRY(passwordLogin),FALSE);
+// gtk_entry_set_invisible_char (GTK_ENTRY(passwordLogin),G_UNICODE_ENCLOSING_MARK);
 gtk_entry_set_invisible_char (GTK_ENTRY(password),G_UNICODE_ENCLOSING_MARK);
 g_signal_connect(button2,"clicked",G_CALLBACK(SIGNUP),NULL);
 g_signal_connect(button5,"clicked",G_CALLBACK(SignUpp),NULL);
 g_signal_connect(button1,"clicked",G_CALLBACK(LOGIN),NULL);
 g_signal_connect(button6,"clicked",G_CALLBACK(LOGin),NULL);
 g_signal_connect(button7,"clicked",G_CALLBACK(MENU),NULL);
+g_signal_connect(button77,"clicked",G_CALLBACK(MENU),NULL);
+
 
 gtk_widget_show_all (window);
 

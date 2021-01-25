@@ -33,7 +33,7 @@ extern GtkWidget* button3;
 extern GtkWidget* button4;
 extern GtkWidget* button5;
 extern GtkWidget* button7;
-
+extern GtkWidget* button77;
 extern FILE *fp;
 extern GtkWidget* usernameLogin;
 extern GtkWidget* passwordLogin;
