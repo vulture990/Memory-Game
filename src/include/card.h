@@ -37,6 +37,7 @@ Card* cardconstructor(struct card* c,GtkWidget* backCard,GtkWidget* front,GtkWid
 void initBoard();
 void mainCard(void);
 int get_index(GtkButton* btn);
+gboolean hide_pcard(gpointer data);
 
 
 
