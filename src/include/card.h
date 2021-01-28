@@ -20,10 +20,23 @@ typedef struct card
     void (*showCard)(struct card* self);
     void (*flip)(struct card* self);
 }Card;
+typedef struct pairCard
+{
+    card* card_1;
+    card* card_2;
+    GtkWidget* frontImage;
+    GtkWidget* backImage;
+    //path
+    char* cardMatch1;
+    char* cardMatch2;
+}PairCard;
+
+bool match(char *card_1,char* card_2);
 Card* newCard(void);
 void showCard(struct card *card);
 void flip(struct card* card);
 Card* cardconstructor(struct card* c,GtkWidget* backCard,GtkWidget* front,GtkWidget* button);
+void initBoard();
 void mainCard(void);
 int get_index(GtkButton* btn);
 
