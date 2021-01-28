@@ -7,12 +7,15 @@
 #include "card.h"
 
 const gchar*  cardID[16] = {"btn1","btn2","btn3","btn4","btn5","btn6","btn7","btn8","btn9","btn10","btn11","btn12","btn13","btn14","btn15","btn16"};
-const char * img={"./rsc/pokemon.png"};
-const gchar*  backCardImagePath[16]={"rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img1.png4","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img8.png","rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img1.png4","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img8.png"};
+const gchar*  backCardImagePath[16]={"rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img4.png","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img9.png","rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img4.png","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img9.png"};
 GtkWidget* buttons[16];
 GtkWidget* images[16];
-GtkWidget* imagesFront;
-
+GtkWidget* imagesFront[16];
+PairCard* pcard;
+pcard->cardMatch1=NULL;
+pcard->cardMatch2=NULL;
+pcard->card_1=newCard(card_1);
+p->card_2=newCard(card_2);
 Card* card=newCard();
 
 Card* newCard(void)//always remeber to release the memory space after you are done
@@ -26,14 +29,17 @@ void showCard(Card *card)
 {
     if(card->showing)
     {
+
+        gtk_button_set_always_show_image (GTK_BUTTON(card->button),TRUE);
         gtk_button_set_image(GTK_BUTTON(card->button),card->backImage);
-        gtk_widget_show(card->backImage);
+        //gtk_widget_show(card->backImage);
         
     }
     else
     {
+        gtk_button_set_always_show_image (GTK_BUTTON(card->button),TRUE);
         gtk_button_set_image(GTK_BUTTON(card->button),card->frontImage);
-        gtk_widget_show(card->frontImage);
+        //gtk_widget_show(card->frontImage);
 
     }
 }
@@ -55,7 +61,7 @@ Card* cardconstructor(struct card* card,GtkWidget *BACKCARD,GtkWidget *FRONT,Gtk
     card->button=BUTTON;
     card->frontImage=FRONT;
     card->backImage=BACKCARD;
-    card->showing=false;//which simply means all cards are turned down by default
+    //card->showing=true;//which simply means all cards are turned down by default
     // card->showCard=showCard;
     // card->flip=flipCard;
     return card;
@@ -72,17 +78,53 @@ int get_index(GtkButton* btn)//getter
     return index;
 }
 
-void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 card
+void initBoard()
 {
-    
-    int i=get_index(button);
+    for(int i=0;i<16;i++)
+    {
+         gtk_button_set_image(GTK_BUTTON(buttons[i]),imagesFront[i]);
+        
+        //gtk_widget_show(imagesFront[i]);
 
-    card=cardconstructor(card,images[i],imagesFront,GTK_WIDGET(button));
-
-    showCard(card);
-
+    }
 }
 
+bool match(char *card_1,char* card_2)
+{
+    int res;
+    res=strcmp(card_1,card_2);
+    if(res)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 card
+{
+    int i=get_index(button);
+//    card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
+    if(pcard->cardMatch1==NULL)//if an empty 1rst button do the following
+    {
+        card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));//initializing card
+        card->showing=true;
+        pcard->cardMatch1=backCardImagePath[i];
+        showCard(card);
+        return;
+    }
+    else
+    {
+        card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
+        card->showing=false;
+        pcard->cardMatch2=backCardImagePath[i];
+        showCard(card);
+        //now it s time to compare the two cards
+        match(pcard->cardMatch1,pcard->cardMatch2);
+    }
+}
 void mainCard(void)
 {
 
@@ -90,7 +132,7 @@ void mainCard(void)
    // card=cardconstructor(card,,"./rsc/pokemon.p);
     // we must first click the button then show
 
-    //flipCard(card);
+    // flipCard(card);
     
     GtkWidget* window;
     builder=gtk_builder_new_from_file ("./src/gameboard.glade");
@@ -103,12 +145,15 @@ void mainCard(void)
     {
         images[i]=gtk_image_new_from_file(backCardImagePath[i]);
     }
-
-    imagesFront=gtk_image_new_from_file("./rsc/pokemon.png");
-
     for(int i=0;i<16;i++)
     {
-        g_signal_connect(buttons[i],"clicked",G_CALLBACK(clickButton),NULL);
+        imagesFront[i]=gtk_image_new_from_file("rsc/pokemon.png");
+    }
+
+    initBoard();
+    for(int i=0;i<16;i++)
+    {
+         g_signal_connect(buttons[i],"clicked",G_CALLBACK(clickButton),NULL);
     }
 
     gtk_widget_show_all (window);
@@ -292,6 +337,54 @@ void mainCard(void)
 //     printCells(m);
 //     matching(m);
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
