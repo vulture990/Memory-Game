@@ -24,8 +24,6 @@ typedef struct pairCard
 {
     card* card_1;
     card* card_2;
-    GtkWidget* frontImage;
-    GtkWidget* backImage;
     //path
     char* cardMatch1;
     char* cardMatch2;
