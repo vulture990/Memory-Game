@@ -105,10 +105,15 @@ gboolean hide_pcard(gpointer data
 ){   ///
     int index1 = get_index(GTK_BUTTON(pcard->card_1->button));
     int index2 = get_index(GTK_BUTTON(pcard->card_2->button));
-    pcard->card_1->showing=false;
-    pcard->card_2->showing=false; 
-    showCard(pcard->card_1);  ///show front
-    showCard(pcard->card_2);    /// show front
+    //pcard->card_1->showing=false;
+    //pcard->card_2->showing=false; 
+   // showCard(pcard->card_1);  ///show front
+  //  showCard(pcard->card_2);    /// show front
+    gtk_button_set_always_show_image (GTK_BUTTON(buttons[index1]),TRUE);
+    gtk_button_set_image(GTK_BUTTON(buttons[index1]),card->frontImage);
+    //
+     gtk_button_set_always_show_image (GTK_BUTTON(buttons[index2]),TRUE);
+     gtk_button_set_image(GTK_BUTTON(buttons[index2]),card->frontImage);
     return G_SOURCE_REMOVE;
 }
 
@@ -117,6 +122,13 @@ void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 
     int i=get_index(button);
     card=newCard();
 //    card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
+    if(	pcard->cardMatch1 != NULL && pcard->cardMatch2 != NULL ){
+    	pcard->cardMatch1 == NULL;
+	pcard->cardMatch2 == NULL;
+	pcard->card_1 == NULL;
+	pcard->card_2 == NULL;
+	
+    }
     if(pcard->cardMatch1==NULL)//if an empty 1rst button do the following
     {
         
