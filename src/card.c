@@ -109,9 +109,13 @@ gboolean hide_pcard(gpointer data
     //pcard->card_2->showing=false; 
    // showCard(pcard->card_1);  ///show front
   //  showCard(pcard->card_2);    /// show front
+    printf("this is to hide the card\n");
+    gtk_widget_hide(images[index1]);
     gtk_button_set_always_show_image (GTK_BUTTON(buttons[index1]),TRUE);
     gtk_button_set_image(GTK_BUTTON(buttons[index1]),card->frontImage);
-    //
+    gtk_widget_hide(images[index2]);
+
+    printf("imma about to show imaga2\n");
      gtk_button_set_always_show_image (GTK_BUTTON(buttons[index2]),TRUE);
      gtk_button_set_image(GTK_BUTTON(buttons[index2]),card->frontImage);
     return G_SOURCE_REMOVE;
@@ -122,8 +126,9 @@ void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 
     int i=get_index(button);
     card=newCard();
 //    card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
-    if(	pcard->cardMatch1 != NULL && pcard->cardMatch2 != NULL ){
-    	pcard->cardMatch1 == NULL;
+    if(	pcard->cardMatch1 != NULL && pcard->cardMatch2 != NULL )
+    {
+    pcard->cardMatch1 == NULL;
 	pcard->cardMatch2 == NULL;
 	pcard->card_1 == NULL;
 	pcard->card_2 == NULL;
@@ -140,8 +145,7 @@ void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 
         showCard(card);
         return;
     }
-    else
-    {
+
         card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
         card->showing=true;
         pcard->cardMatch2=backCardImagePath[i];
@@ -156,11 +160,16 @@ void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 
 	    }
 	    else
         {      ///
+
             printf("mataytsawawh\n");
 	        g_timeout_add(750, hide_pcard, NULL); ///
+             pcard->cardMatch1 == NULL;
+	        pcard->cardMatch2 == NULL;
+	        pcard->card_1 == NULL;
+	        pcard->card_2 == NULL;
 	    }
     
-    }
+    
 }
 void mainCard(void)
 {
