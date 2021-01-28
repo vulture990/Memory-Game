@@ -7,15 +7,12 @@
 #include "card.h"
 
 const gchar*  cardID[16] = {"btn1","btn2","btn3","btn4","btn5","btn6","btn7","btn8","btn9","btn10","btn11","btn12","btn13","btn14","btn15","btn16"};
-const gchar*  backCardImagePath[16]={"rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img4.png","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img9.png","rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img4.png","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img9.png"};
+gchar*  backCardImagePath[16]={"rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img4.png","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img9.png","rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img4.png","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img9.png"};
 GtkWidget* buttons[16];
 GtkWidget* images[16];
 GtkWidget* imagesFront[16];
-PairCard* pcard;
-pcard->cardMatch1=NULL;
-pcard->cardMatch2=NULL;
-pcard->card_1=newCard(card_1);
-p->card_2=newCard(card_2);
+PairCard* pcard=(struct pairCard *)malloc(sizeof(struct pairCard));
+
 Card* card=newCard();
 
 Card* newCard(void)//always remeber to release the memory space after you are done
@@ -95,6 +92,7 @@ bool match(char *card_1,char* card_2)
     res=strcmp(card_1,card_2);
     if(res)
     {
+        printf("this is Match\n");
         return false;
     }
     else
@@ -103,7 +101,8 @@ bool match(char *card_1,char* card_2)
     }
 }
 
-gboolean hide_pcard(gpointer data){   ///
+gboolean hide_pcard(gpointer data
+){   ///
     int index1 = get_index(GTK_BUTTON(pcard->card_1->button));
     int index2 = get_index(GTK_BUTTON(pcard->card_2->button));
     pcard->card_1->showing=false;
@@ -116,14 +115,16 @@ gboolean hide_pcard(gpointer data){   ///
 void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 card
 {
     int i=get_index(button);
+    card=newCard();
 //    card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
     if(pcard->cardMatch1==NULL)//if an empty 1rst button do the following
     {
+        
         card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));//initializing card
         card->showing=true;
         pcard->cardMatch1=backCardImagePath[i];
-	pcard->card_1->frontImage = images[i];           ///
-	pcard->card_1->button = button;   ///
+	    pcard->card_1->frontImage = images[i];           ///
+	    pcard->card_1->button =GTK_WIDGET(button);   ///
         showCard(card);
         return;
     }
@@ -132,17 +133,21 @@ void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 
         card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
         card->showing=true;
         pcard->cardMatch2=backCardImagePath[i];
-	pcard->card_2->frontImage = images[i];  ///
-	pcard->card_2->button = button;   ///
+	    pcard->card_2->frontImage = images[i];  ///
+	    pcard->card_2->button =GTK_WIDGET(button);   ///
         showCard(card);
         //now it s time to compare the two cards
-        if(match(pcard->cardMatch1,pcard->cardMatch2)){   ///
-	     // check wining
+        if(match(pcard->cardMatch1,pcard->cardMatch2))
+        {   ///
+	     printf("check wining\n");
 	      return ;    ///
-	}
-	else{      ///
-	      g_timeout_add(750, hide_pcard, NULL); ///
-	}
+	    }
+	    else
+        {      ///
+            printf("mataytsawawh\n");
+	        g_timeout_add(750, hide_pcard, NULL); ///
+	    }
+    
     }
 }
 void mainCard(void)
@@ -153,7 +158,12 @@ void mainCard(void)
     // we must first click the button then show
 
     // flipCard(card);
-    
+    pcard->cardMatch1=(char *)malloc(50*sizeof(char));
+    pcard->cardMatch2=(char *)malloc(50*sizeof(char));
+    pcard->cardMatch1=NULL;
+    pcard->cardMatch2=NULL;
+    pcard->card_1=newCard();
+    pcard->card_2=newCard();
     GtkWidget* window;
     builder=gtk_builder_new_from_file ("./src/gameboard.glade");
     window=GTK_WIDGET(gtk_builder_get_object(builder,"gameWindow"));
