@@ -103,6 +103,16 @@ bool match(char *card_1,char* card_2)
     }
 }
 
+gboolean hide_pcard(gpointer data){   ///
+    int index1 = get_index(GTK_BUTTON(pcard->card_1->button));
+    int index2 = get_index(GTK_BUTTON(pcard->card_2->button));
+    pcard->card_1->showing=false;
+    pcard->card_2->showing=false; 
+    showCard(pcard->card_1);  ///show front
+    showCard(pcard->card_2);    /// show front
+    return G_SOURCE_REMOVE;
+}
+
 void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 card
 {
     int i=get_index(button);
@@ -112,17 +122,27 @@ void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 
         card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));//initializing card
         card->showing=true;
         pcard->cardMatch1=backCardImagePath[i];
+	pcard->card_1->frontImage = images[i];           ///
+	pcard->card_1->button = button;   ///
         showCard(card);
         return;
     }
     else
     {
         card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
-        card->showing=false;
+        card->showing=true;
         pcard->cardMatch2=backCardImagePath[i];
+	pcard->card_2->frontImage = images[i];  ///
+	pcard->card_2->button = button;   ///
         showCard(card);
         //now it s time to compare the two cards
-        match(pcard->cardMatch1,pcard->cardMatch2);
+        if(match(pcard->cardMatch1,pcard->cardMatch2)){   ///
+	     // check wining
+	      return ;    ///
+	}
+	else{      ///
+	      g_timeout_add(750, hide_pcard, NULL); ///
+	}
     }
 }
 void mainCard(void)
