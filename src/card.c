@@ -208,7 +208,7 @@ void mainCard(void)
     pcard->card_1=newCard();
     pcard->card_2=newCard();
     GtkWidget* window;
-    builder=gtk_builder_new_from_file ("./src/gameboard.glade");
+    builder=gtk_builder_new_from_file ("./rsc/glade/gameboard.glade");
     window=GTK_WIDGET(gtk_builder_get_object(builder,"gameWindow"));
     for(int i=0;i<16;i++)
     {
