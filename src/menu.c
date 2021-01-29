@@ -151,7 +151,7 @@ void LOGIN(GtkButton *button, gpointer data)
 void menu(void)
 {
 
-builder=gtk_builder_new_from_file ("./src/memorygame2.glade");
+builder=gtk_builder_new_from_file ("./rsc/glade/memorygame2.glade");
 
 window=GTK_WIDGET(gtk_builder_get_object(builder,"window1"));
 
