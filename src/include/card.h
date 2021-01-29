@@ -29,11 +29,14 @@ typedef struct pairCard
     char* cardMatch2;
 }PairCard;
 
+
+
 bool match(char *card_1,char* card_2);
 Card* newCard(void);
 void showCard(struct card *card);
 void flip(struct card* card);
 Card* cardconstructor(struct card* c,GtkWidget* backCard,GtkWidget* front,GtkWidget* button);
+void reset();
 void initBoard();
 void mainCard(void);
 int get_index(GtkButton* btn);
