@@ -5,15 +5,15 @@
 #include<stdbool.h>
 
 #include "card.h"
+int j=0;
 
 const gchar*  cardID[16] = {"btn1","btn2","btn3","btn4","btn5","btn6","btn7","btn8","btn9","btn10","btn11","btn12","btn13","btn14","btn15","btn16"};
 gchar*  backCardImagePath[16]={"rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img4.png","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img9.png","rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img4.png","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img9.png"};
 GtkWidget* buttons[16];
 GtkWidget* images[16];
 GtkWidget* imagesFront[16];
-struct pairCard* pcard=(struct pairCard *)calloc(1,sizeof(struct pairCard));
+struct pairCard* pcard=(struct pairCard *)malloc(sizeof(struct pairCard));
 Card* card=newCard();
-
 
 Card* newCard(void)//always remeber to release the memory space after you are done
 {
@@ -29,7 +29,7 @@ void showCard(Card *card)
 
         gtk_button_set_always_show_image (GTK_BUTTON(card->button),TRUE);
         gtk_button_set_image(GTK_BUTTON(card->button),card->backImage);
-        //gtk_widget_show(card->backImage);
+        gtk_widget_show(card->backImage);
         
     }
     else
@@ -108,8 +108,8 @@ gboolean hide_pcard(gpointer data)//resets the pair of  cards if they are unmatc
     //pcard->card_2->showing=false; 
    // showCard(pcard->card_1);  ///show front
   //  showCard(pcard->card_2);    /// show front
-    flip(pcard->card_1);
-    flip(pcard->card_2);
+   // flip(pcard->card_1);
+    //flip(pcard->card_2);
     printf("time to hide image 1\n");
     gtk_widget_hide(images[index1]);
 
@@ -118,34 +118,31 @@ gboolean hide_pcard(gpointer data)//resets the pair of  cards if they are unmatc
      GtkWidget* img2=gtk_image_new_from_file("rsc/pokemon.png");
     gtk_button_set_image(GTK_BUTTON(buttons[index1]),img1);
     printf("time to hide image 2\n");
+
     gtk_widget_hide(images[index2]);
     //gtk_widget_destroy(images[index2]);
     gtk_button_set_always_show_image (GTK_BUTTON(buttons[index2]),TRUE);
     gtk_button_set_image(GTK_BUTTON(buttons[index2]),img2);
-    
+    printf("time to reset\n");
+    reset();
+    printf("reseted \n");
 
     return G_SOURCE_REMOVE;
 }
 void reset()
 {
-    free(pcard);
-    pcard=(struct pairCard *)calloc(1,sizeof(struct pairCard));
     pcard->cardMatch1 = NULL;
     pcard->cardMatch2 = NULL;
-    pcard->card_1 = NULL;
-	pcard->card_2 = NULL;
+    
 }
 static void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 card
 {
-    int id;
+    
     int i=get_index(button);
     card=newCard();
     card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
     if(	pcard->cardMatch1 != NULL && pcard->cardMatch2 != NULL)
     {
-        // free(pcard);
-        // pcard=(struct pairCard *)malloc(sizeof(struct pairCard));
-
         reset();
     }
     if(pcard->cardMatch1==NULL)//if an empty 1rst button do the following
@@ -154,7 +151,7 @@ static void clickButton(GtkButton*button,gpointer data)// we r gonna pass addres
         card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));//initializing card
         card->showing=true;
         pcard->cardMatch1=backCardImagePath[i];
-	    pcard->card_1->frontImage = images[i];           ///
+	    pcard->card_1->backImage =images[i];           ///
 	    pcard->card_1->button =GTK_WIDGET(button);   ///
         showCard(card);
         return;
@@ -162,36 +159,27 @@ static void clickButton(GtkButton*button,gpointer data)// we r gonna pass addres
         card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
         card->showing=true;
         pcard->cardMatch2=backCardImagePath[i];
-	    pcard->card_2->frontImage = images[i];  ///
+	    pcard->card_2->backImage = images[i];  ///
 	    pcard->card_2->button =GTK_WIDGET(button);   ///
         showCard(card);
         //now it s time to compare the two cards
         if(match(pcard->cardMatch1,pcard->cardMatch2))
         {   ///
-	      printf("they matched\n");
-        //  free(pcard);
-        //  pcard=(struct pairCard *)malloc(sizeof(struct pairCard));
-
+	     printf("they matched\n");
          reset();
-         return;
-	          ///
+	      return ;    ///
 	    }
 	    else
         {      ///
+            do
+            {
 
             printf("they didn't\n");
-            g_timeout_add(750, hide_pcard,NULL); ///
+	        g_timeout_add(750, hide_pcard,NULL); ///
             printf("i passed the tst");
-
-
-            reset();
-        
-	        
-            printf("time to reset\n");
-            printf("reseted \n");
+            //reset();
+            }while (j!=0);        
         }
-    
-    
 }
 void mainCard(void)
 {
@@ -208,7 +196,7 @@ void mainCard(void)
     pcard->card_1=newCard();
     pcard->card_2=newCard();
     GtkWidget* window;
-    builder=gtk_builder_new_from_file ("./rsc/glade/gameboard.glade");
+    builder=gtk_builder_new_from_file ("./src/gameboard.glade");
     window=GTK_WIDGET(gtk_builder_get_object(builder,"gameWindow"));
     for(int i=0;i<16;i++)
     {
