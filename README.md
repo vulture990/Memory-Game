@@ -19,4 +19,4 @@ make
 sudo ./Match_Match_Up
 ```
 ## Preview 
-![](2021-01-30 18-39-37.gif)
+![](https://github.com/vulture990/Memory-Game/blob/main/2021-01-30%2018-39-37.gif)
