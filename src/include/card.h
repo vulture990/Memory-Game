@@ -22,11 +22,12 @@ typedef struct card
 }Card;
 typedef struct pairCard
 {
-    card* card_1;
-    card* card_2;
+    Card* card_1;
+    Card* card_2;
     //path
     char* cardMatch1;
     char* cardMatch2;
+    int numberOfclicks;
 }PairCard;
 
 
@@ -38,9 +39,10 @@ void flip(struct card* card);
 Card* cardconstructor(struct card* c,GtkWidget* backCard,GtkWidget* front,GtkWidget* button);
 void reset();
 void initBoard();
-void mainCard(void);
+void mainCard();
 int get_index(GtkButton* btn);
 gboolean hide_pcard(gpointer data);
+void shuffling(void);
 
 
 
