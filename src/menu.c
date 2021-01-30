@@ -2,8 +2,9 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include "menu.h"
-
+#include "card.h"
 GtkBuilder* builder;
+GtkBuilder* builder2;
 GtkWidget* username;
 GtkWidget* password;
 GtkWidget* usernameLogin;
@@ -19,9 +20,9 @@ GtkWidget* button3;
 GtkWidget* button4;
 GtkWidget* button5;
 GtkWidget* button7;
-GtkWidget* button8;
 GtkWidget* button77;
-
+GtkWidget* button8;
+GtkWidget* button9;
 FILE *fp;
 
 
@@ -151,8 +152,8 @@ void LOGIN(GtkButton *button, gpointer data)
 void menu(void)
 {
 
-builder=gtk_builder_new_from_file ("./rsc/glade/memorygame2.glade");
-
+builder=gtk_builder_new_from_file ("./src/memorygame2.glade");
+builder2=gtk_builder_new_from_file ("./src/gameboard.glade");
 window=GTK_WIDGET(gtk_builder_get_object(builder,"window1"));
 
 window2=GTK_WIDGET(gtk_builder_get_object(builder,"window2"));
@@ -174,6 +175,10 @@ button6=GTK_WIDGET(gtk_builder_get_object(builder,"Login2"));
 button7=GTK_WIDGET(gtk_builder_get_object(builder,"GOBACKTOMENU"));
 
 button77=GTK_WIDGET(gtk_builder_get_object(builder,"GOBACKHOME2"));
+button8=GTK_WIDGET(gtk_builder_get_object(builder2,"Home"));
+button9=GTK_WIDGET(gtk_builder_get_object(builder2,"Restart"));
+
+
 username=GTK_WIDGET(gtk_builder_get_object(builder,"USERNAMESIGNUP"));
 password=GTK_WIDGET(gtk_builder_get_object(builder,"PASSWORDSIGNUP"));
 usernameLogin=GTK_WIDGET(gtk_builder_get_object(builder,"USERNAMELOGIN"));
@@ -194,7 +199,9 @@ g_signal_connect(button1,"clicked",G_CALLBACK(LOGIN),NULL);
 g_signal_connect(button6,"clicked",G_CALLBACK(LOGin),NULL);
 g_signal_connect(button7,"clicked",G_CALLBACK(MENU),NULL);
 g_signal_connect(button77,"clicked",G_CALLBACK(MENU),NULL);
-
+g_signal_connect(button8,"clicked",G_CALLBACK(MENU),NULL);
+g_signal_connect(button4,"clicked",G_CALLBACK(mainCard),NULL);
+g_signal_connect(button9,"clicked",G_CALLBACK(mainCard),NULL);
 
 gtk_widget_show_all (window);
 
