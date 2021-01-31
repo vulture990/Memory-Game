@@ -10,7 +10,6 @@ int main(int argc,char* argv[])
 {
     gtk_init(&argc,&argv);
     menu();
-    //mainCard();
     gtk_main();
     return 0;
 }
