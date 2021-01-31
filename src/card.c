@@ -267,6 +267,20 @@ void shuffling()
 }
 
 
+/*
+void add_OR_update_user_score(score* user_score){  ////
+    if(If_user_score_exist(user_score) == FALSE){
+        FILE * file;
+        file = fopen("user.bin","ab");
+        fwrite(user_score,sizeof(score),1,file);
+        fclose(file);
+    }
+
+}
+
+*/
+
+
 
 
 
