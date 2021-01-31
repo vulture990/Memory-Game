@@ -62,8 +62,8 @@ Card* cardconstructor(struct card* card,GtkWidget *BACKCARD,GtkWidget *FRONT,Gtk
     card->backImage=BACKCARD;
 
     //card->showing=true;//which simply means all cards are turned down by default
-    // card->showCard=showCard;
-    // card->flip=flipCard;
+    card->showCard=showCard;
+    card->flip=flipCard;
     return card;
 
 }
@@ -255,7 +255,7 @@ void shuffling()
     GRand * generator;
     generator = g_rand_new ();
     int random1,random2;
-    for (i=0;i<200;i++)
+    for (i=0;i<200;i++)// we made the range big for it to shuffle randomly at each instance
     {
         random1 = g_rand_int_range(generator,0,12);
         random2 = g_rand_int_range(generator,0,12);
