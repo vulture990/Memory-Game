@@ -212,7 +212,7 @@ void mainCard()
     // we must first click the button then show
 
     // flipCard(card);
-    builderr=gtk_builder_new_from_file ("./src/memorygame2.glade");
+    builderr=gtk_builder_new_from_file ("./rsc/glade/memorygame2.glade");
 
     pcard->cardMatch1=(char *)malloc(50*sizeof(char));
     pcard->cardMatch2=(char *)malloc(50*sizeof(char));
@@ -221,7 +221,7 @@ void mainCard()
     pcard->card_1=newCard();
     pcard->card_2=newCard();
     GtkWidget* window;
-    builder=gtk_builder_new_from_file ("./src/gameboard.glade");
+    builder=gtk_builder_new_from_file ("./rsc/glade/gameboard.glade");
     window=GTK_WIDGET(gtk_builder_get_object(builder,"gameWindow"));
     for(int i=0;i<16;i++)
     {
