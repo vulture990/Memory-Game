@@ -14,6 +14,11 @@ sudo apt-get install glade
 cmake .
 make 
 ```
+## Dependencies 
+```
+Preferbly lastest stable version
+ -> GCC 10.2 
+```
 ## Run
 ```
 sudo ./Match_Match_Up
