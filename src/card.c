@@ -25,13 +25,13 @@ void showCard(Card *card)
 {
     if(card->showing)
     {
-        
+
         gtk_button_set_always_show_image (GTK_BUTTON(card->button),TRUE);
         g_object_ref(card->backImage);
 
         gtk_button_set_image(GTK_BUTTON(card->button),card->backImage);
         gtk_widget_show(card->backImage);
-        
+
     }
     else
     {
@@ -60,10 +60,10 @@ Card* cardconstructor(struct card* card,GtkWidget *BACKCARD,GtkWidget *FRONT,Gtk
     card->button=BUTTON;
     card->frontImage=FRONT;
     card->backImage=BACKCARD;
-
+    card->clicks=0;
     //card->showing=true;//which simply means all cards are turned down by default
-    card->showCard=showCard;
-    card->flip=flipCard;
+    //card->showCard=showCard;
+    //card->flip=flipCard;
     return card;
 
 }
@@ -83,7 +83,6 @@ void initBoard()
     for(int i=0;i<16;i++)
     {
          gtk_button_set_image(GTK_BUTTON(buttons[i]),imagesFront[i]);
-        
         //gtk_widget_show(imagesFront[i]);
 
     }
@@ -139,11 +138,11 @@ void reset()
     pcard->cardMatch1 = NULL;
     pcard->cardMatch2 = NULL;
     pcard->numberOfclicks=0;
-    
+
 }
 static void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 card
 {
-    
+
     int i=get_index(button);
     card=newCard();
     card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));
@@ -153,15 +152,14 @@ static void clickButton(GtkButton*button,gpointer data)// we r gonna pass addres
     }
     if(pcard->cardMatch1==NULL)//if an empty 1rst button do the following
     {
-        
-        card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));//initializing card
-        pcard->numberOfclicks++;
-        card->showing=true;
-        pcard->cardMatch1=backCardImagePath[i];
-	    pcard->card_1->backImage =images[i];           ///
-	    pcard->card_1->button =GTK_WIDGET(button);   ///
-        showCard(card);
-        return;
+            card=cardconstructor(card,images[i],imagesFront[i],GTK_WIDGET(button));//initializing card
+            pcard->numberOfclicks++;
+            card->showing=true;
+            pcard->cardMatch1=backCardImagePath[i];
+	        pcard->card_1->backImage =images[i];           ///
+	        pcard->card_1->button =GTK_WIDGET(button);   ///
+            showCard(card);
+            return;
     }
     do
     {
@@ -176,15 +174,16 @@ static void clickButton(GtkButton*button,gpointer data)// we r gonna pass addres
         //now it s time to compare the two cards
         if(match(pcard->cardMatch1,pcard->cardMatch2))
         {
+            if(pcard->card_1->button != pcard->card_2->button)
+            {
             printf("they matched\n");
             reset();
              if(pcard->numberOfclicks<=1)
             {   ///
-	        
                 pcard->numberOfclicks=1;
-            
 	            return ;    ///
 	        }
+            }        
         }
 	    else
         {      ///
@@ -196,7 +195,7 @@ static void clickButton(GtkButton*button,gpointer data)// we r gonna pass addres
             printf("i passed the tst");
             pcard->numberOfclicks=1;
             //reset();
-            }while (j!=0);        
+            }while (j!=0);
         }
     }while(!pcard->numberOfclicks);
 
@@ -212,7 +211,7 @@ void mainCard()
     // we must first click the button then show
 
     // flipCard(card);
-    builderr=gtk_builder_new_from_file ("./rsc/glade/memorygame2.glade");
+    builderr=gtk_builder_new_from_file ("./src/memorygame2.glade");
 
     pcard->cardMatch1=(char *)malloc(50*sizeof(char));
     pcard->cardMatch2=(char *)malloc(50*sizeof(char));
@@ -221,7 +220,7 @@ void mainCard()
     pcard->card_1=newCard();
     pcard->card_2=newCard();
     GtkWidget* window;
-    builder=gtk_builder_new_from_file ("./rsc/glade/gameboard.glade");
+    builder=gtk_builder_new_from_file ("./src/gameboard.glade");
     window=GTK_WIDGET(gtk_builder_get_object(builder,"gameWindow"));
     for(int i=0;i<16;i++)
     {
@@ -255,7 +254,7 @@ void shuffling()
     GRand * generator;
     generator = g_rand_new ();
     int random1,random2;
-    for (i=0;i<200;i++)// we made the range big for it to shuffle randomly at each instance
+    for (i=0;i<200;i++)
     {
         random1 = g_rand_int_range(generator,0,12);
         random2 = g_rand_int_range(generator,0,12);
@@ -267,18 +266,6 @@ void shuffling()
 }
 
 
-/*
-void add_OR_update_user_score(score* user_score){  ////
-    if(If_user_score_exist(user_score) == FALSE){
-        FILE * file;
-        file = fopen("user.bin","ab");
-        fwrite(user_score,sizeof(score),1,file);
-        fclose(file);
-    }
-
-}
-
-*/
 
 
 
