@@ -91,7 +91,7 @@ void initBoard()
 bool match(char *card_1,char* card_2)
 {
     int res;
-    res=strcmp(card_1,card_2);
+    res=g_strcmp0(card_1,card_2);
     if(res)
     {
         return false;
@@ -128,8 +128,7 @@ gboolean hide_pcard(gpointer data)//resets the pair of  cards if they are unmatc
     gtk_button_set_always_show_image (GTK_BUTTON(buttons[index2]),TRUE);
     gtk_button_set_image(GTK_BUTTON(buttons[index2]),img2);
     printf("time to reset\n");
-    reset();
-    printf("reseted \n");
+    printf("reseted\n");
 
     return G_SOURCE_REMOVE;
 }
@@ -183,7 +182,14 @@ static void clickButton(GtkButton*button,gpointer data)// we r gonna pass addres
                 pcard->numberOfclicks=1;
 	            return ;    ///
 	        }
-            }        
+            }
+            else
+            {
+                printf("I pressed twice on same image\n");
+                pcard->cardMatch2 = NULL;
+                printf("i reseted\n ");
+            }
+            
         }
 	    else
         {      ///
@@ -264,11 +270,6 @@ void shuffling()
         backCardImagePath[random2] = inter2;
     }
 }
-
-
-
-
-
 
 
 
