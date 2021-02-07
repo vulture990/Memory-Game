@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkWindow" id="main_window">
+    <property name="can-focus">False</property>
+    <property name="window-position">center-always</property>
+    <child>
+      <object class="GtkFixed" id="main_container">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkImage" id="image_bg">
+            <property name="width-request">800</property>
+            <property name="height-request">600</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="pixbuf">..\login-bg.png</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStack" id="stack1">
+            <property name="width-request">100</property>
+            <property name="height-request">89</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="transition-duration">100</property>
+            <property name="transition-type">over-left-right</property>
+            <child>
+              <object class="GtkBox" id="box_page1">
+                <property name="width-request">385</property>
+                <property name="height-request">163</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">8</property>
+                <child>
+                  <!-- n-columns=1 n-rows=1 -->
+                  <object class="GtkGrid" id="grid_incorrect_login">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl_incorrect_login">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-left">201</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Segoe Print Bold 8"/>
+                          <attribute name="foreground" value="#ffff00000000"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <!-- n-columns=2 n-rows=1 -->
+                  <object class="GtkGrid" id="grid_username">
+                    <property name="height-request">41</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="column-spacing">8</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl_username">
+                        <property name="width-request">189</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Username</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Segoe Print Bold 15"/>
+                          <attribute name="foreground" value="#f6f6f5f5f4f4"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="entry_username">
+                        <property name="width-request">188</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <!-- n-columns=2 n-rows=1 -->
+                  <object class="GtkGrid" id="grid_password">
+                    <property name="width-request">0</property>
+                    <property name="height-request">39</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="column-spacing">8</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl_password">
+                        <property name="width-request">189</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Password</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Segoe Print Bold 15"/>
+                          <attribute name="foreground" value="#f6f6f5f5f4f4"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="entry_password">
+                        <property name="width-request">188</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_login">
+                    <property name="label" translatable="yes">Log in </property>
+                    <property name="width-request">100</property>
+                    <property name="height-request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="margin-left">285</property>
+                    <property name="margin-right">77</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">Sign In</property>
+                <property name="title" translatable="yes">Sign In</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="box_page2">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <!-- n-columns=2 n-rows=1 -->
+                  <object class="GtkGrid" id="grid_email">
+                    <property name="width-request">0</property>
+                    <property name="height-request">39</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="column-spacing">8</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl_email">
+                        <property name="width-request">189</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Email</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Segoe Print Bold 15"/>
+                          <attribute name="foreground" value="#f6f6f5f5f4f4"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="entry_email">
+                        <property name="width-request">188</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <!-- n-columns=2 n-rows=1 -->
+                  <object class="GtkGrid" id="grid_username2">
+                    <property name="width-request">0</property>
+                    <property name="height-request">39</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="column-spacing">8</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl_username2">
+                        <property name="width-request">189</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Username</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Segoe Print Bold 15"/>
+                          <attribute name="foreground" value="#f6f6f5f5f4f4"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="entry_username2">
+                        <property name="width-request">188</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <!-- n-columns=2 n-rows=1 -->
+                  <object class="GtkGrid" id="grid_password2">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl_password2">
+                        <property name="width-request">189</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Password</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Segoe Print Bold 15"/>
+                          <attribute name="foreground" value="#f6f6f5f5f4f4"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="entry_password2">
+                        <property name="width-request">189</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="margin-left">7</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_signup">
+                    <property name="label" translatable="yes">Sign up</property>
+                    <property name="width-request">100</property>
+                    <property name="height-request">30</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="margin-left">285</property>
+                    <property name="margin-right">77</property>
+                    <property name="margin-top">6</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <!-- n-columns=1 n-rows=1 -->
+                  <object class="GtkGrid">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl_successful_signingup">
+                        <property name="width-request">232</property>
+                        <property name="height-request">80</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-left">7</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Segoe Print Bold 13"/>
+                          <attribute name="foreground" value="#74efffff18bf"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">Sign Up</property>
+                <property name="title" translatable="yes">Sign Up</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="x">192</property>
+            <property name="y">236</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStackSwitcher" id="stack_switcher">
+            <property name="width-request">243</property>
+            <property name="height-request">34</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="stack">stack1</property>
+          </object>
+          <packing>
+            <property name="x">499</property>
+            <property name="y">31</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
