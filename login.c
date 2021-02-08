@@ -7,18 +7,14 @@
 #include "login.h"
 
 
-
-
 GtkWidget      *entry_password;
 GtkWidget      *entry_username;
 GtkWidget      *lbl_incorrect_login;
-
 GtkWidget      *entry_email;
 GtkWidget      *entry_username2;
 GtkWidget      *entry_password2;
 GtkWidget      *lbl_successful_signingup;
 GtkWidget      *window_;
-
 
 void login(){
     GtkBuilder      *builder;

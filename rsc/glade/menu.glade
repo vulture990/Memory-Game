@@ -4,6 +4,7 @@
   <requires lib="gtk+" version="3.22"/>
   <object class="GtkWindow" id="window">
     <property name="can-focus">False</property>
+    <property name="window-position">center-always</property>
     <child>
       <object class="GtkFixed">
         <property name="visible">True</property>
@@ -51,6 +52,134 @@
           <packing>
             <property name="x">386</property>
             <property name="y">388</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkWindow" id="window_about_us">
+    <property name="can-focus">False</property>
+    <property name="window-position">center-always</property>
+    <property name="default-width">600</property>
+    <property name="default-height">600</property>
+    <child>
+      <object class="GtkFixed">
+        <property name="width-request">32</property>
+        <property name="height-request">32</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkImage">
+            <property name="width-request">600</property>
+            <property name="height-request">600</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="pixbuf">..\about_us.png</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width-request">288</property>
+            <property name="height-request">70</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">About Us</property>
+            <attributes>
+              <attribute name="font-desc" value="Monospace Bold 36"/>
+              <attribute name="foreground" value="#c0c0bfbfbcbc"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">168</property>
+            <property name="y">32</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width-request">405</property>
+            <property name="height-request">104</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">This game is made by two students of ENSIAS school.
+                      Mohamed SALBI.
+                       Adel DAHANI.
+</property>
+            <attributes>
+              <attribute name="font-desc" value="Segoe Print 9"/>
+              <attribute name="foreground" value="#c0c0bfbfbcbc"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">109</property>
+            <property name="y">144</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width-request">184</property>
+            <property name="height-request">55</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Our github accounts :
+</property>
+            <attributes>
+              <attribute name="font-desc" value="Segoe Print 9"/>
+              <attribute name="foreground" value="#c0c0bfbfbcbc"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">216</property>
+            <property name="y">425</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width-request">188</property>
+            <property name="height-request">54</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">github.com/vulture990
+</property>
+            <attributes>
+              <attribute name="font-desc" value="Segoe Print 9"/>
+              <attribute name="foreground" value="#c0c0bfbfbcbc"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">28</property>
+            <property name="y">487</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width-request">188</property>
+            <property name="height-request">54</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">github.com/dahani9091
+</property>
+            <attributes>
+              <attribute name="font-desc" value="Segoe Print 9"/>
+              <attribute name="foreground" value="#c0c0bfbfbcbc"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">392</property>
+            <property name="y">487</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_back_to_menu">
+            <property name="label" translatable="yes">Back</property>
+            <property name="width-request">100</property>
+            <property name="height-request">38</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+          </object>
+          <packing>
+            <property name="x">252</property>
+            <property name="y">543</property>
           </packing>
         </child>
       </object>

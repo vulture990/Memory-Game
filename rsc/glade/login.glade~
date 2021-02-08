@@ -43,9 +43,10 @@
                       <object class="GtkLabel" id="lbl_incorrect_login">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="margin-left">201</property>
+                        <property name="margin-left">197</property>
+                        <property name="margin-right">2</property>
                         <attributes>
-                          <attribute name="font-desc" value="Segoe Print Bold 8"/>
+                          <attribute name="font-desc" value="Tahoma Bold 7"/>
                           <attribute name="foreground" value="#ffff00000000"/>
                         </attributes>
                       </object>
