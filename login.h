@@ -16,6 +16,5 @@ void login();
 void log_in(GtkButton* btn,User* user);
 void sign_up(GtkButton* btn,NewUser* new_user);
 void check_user_data(User* user_t);
-//void gameloop(User* user,GtkButton* btn_login);
 
 #endif

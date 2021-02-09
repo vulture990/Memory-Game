@@ -4,22 +4,28 @@
 #include <string.h>
 #include<stdbool.h>
 #include "menu.h"
-//#include "login.h"
-//#include "card.h"
 
-static void load_css(void);
+void load_css(void);
 
 int main(int argc,char* argv[])
 {
     gtk_init(&argc,&argv);
+
+    /// loading css
     load_css();
+
+    /// go to menu
     menu();
-    //login();
+
+    ///looping
     gtk_main();
     return 0;
 }
 
-static void load_css(void)
+
+/// loading css fuction
+
+void load_css(void)
 {
     GtkCssProvider *provider;
     GdkDisplay     *display;
