@@ -197,19 +197,16 @@ gboolean hide_pcard(gpointer data)
     GtkWidget* img1 = gtk_image_new_from_file("rsc/pokemon.png");
     GtkWidget* img2 = gtk_image_new_from_file("rsc/pokemon.png");
 
-    printf("time to hide image 1\n");
     gtk_widget_hide(images[index1]);
     gtk_button_set_always_show_image(GTK_BUTTON(buttons[index1]),TRUE);
     g_object_ref(img1);
     g_object_ref(img2);
     gtk_button_set_image(GTK_BUTTON(buttons[index1]),img1);
 
-    printf("time to hide image 2\n");
     gtk_widget_hide(images[index2]);
     gtk_button_set_always_show_image (GTK_BUTTON(buttons[index2]),TRUE);
     gtk_button_set_image(GTK_BUTTON(buttons[index2]),img2);
 
-    printf("reseted\n");
 
     return G_SOURCE_REMOVE;
 }
@@ -271,7 +268,6 @@ void clickButton(GtkButton*button,gpointer data)
             //if the buttons are not the same,Ok
             if(pcard->card_1->button != pcard->card_2->button)
             {
-                printf("they matched\n");
                 reset();
                  if(pcard->numberOfclicks<=1)
                 {
@@ -292,9 +288,7 @@ void clickButton(GtkButton*button,gpointer data)
             //so the buttons here are the same,it's not Ok. The 2nd button still empty
             else
             {
-                printf("I pressed twice on same image\n");
                 pcard->cardMatch2 = NULL;
-                printf("i reseted\n ");
             }
 
         }
@@ -304,7 +298,10 @@ void clickButton(GtkButton*button,gpointer data)
         {
             //counting the number of tries
             trying++;
-            if(trying % 20 == 0){    // if it's 20 tries , you lose
+            int t = trying % 20;
+            if(t<=19 && t>0)  g_print("failed try : %d \n",t);
+            if(t == 0){    // if it's 20 tries , you lose
+                g_print("failed try : 20 \n",t);
                 sprintf(score_str,"%d",score_int);
                 gtk_widget_destroy(window);
                 gtk_label_set_text(GTK_LABEL(lbl_lose_score),score_str);
@@ -315,9 +312,8 @@ void clickButton(GtkButton*button,gpointer data)
             do
             {
             //reset the two images
-            printf("they didn't\n");
 	        g_timeout_add(500, hide_pcard,NULL); ///
-            printf("i passed the tst");
+
             pcard->numberOfclicks=1;
             }while (j!=0);
         }
