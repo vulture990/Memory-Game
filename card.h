@@ -43,6 +43,7 @@ Card* cardconstructor(struct card* c,GtkWidget* backCard,GtkWidget* front,GtkWid
 void reset();
 void initBoard();
 void mainCard(User* user);
+void clickButton(GtkButton*button,gpointer data);
 int get_index(GtkButton* btn);
 gboolean hide_pcard(gpointer data);
 void shuffling(void);

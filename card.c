@@ -6,32 +6,99 @@
 #include "login.h"
 #include "card.h"
 
-
-
-// global var
-int j=0;
+// runing state variables
+struct pairCard* pcard;
+Card* card;
 const gchar*  cardID[16] = {"btn1","btn2","btn3","btn4","btn5","btn6","btn7","btn8","btn9","btn10","btn11","btn12","btn13","btn14","btn15","btn16"};
 gchar*  backCardImagePath[16]={"rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img4.png","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img9.png","rsc/img1.png","rsc/img2.png","rsc/img3.png","rsc/img4.png","rsc/img5.png","rsc/img6.png","rsc/img7.png","rsc/img9.png"};
+int j=0;
+int score_int = 0;
+int wining_counter=0;
+
+// runing state widgets
 GtkWidget* buttons[16];
 GtkWidget* images[16];
 GtkWidget* imagesFront[16];
-// runing state
-
 GtkWidget* window;
 GtkWidget* lbl_player;
 GtkWidget* lbl_score;
-// wining state
+// wining state widgets
 GtkWidget* window_win;
 GtkWidget* lbl_win_score;
-// game over state
+// game over state widgets
 GtkWidget* window_lose;
 GtkWidget* lbl_lose_score;
 GtkWidget* btn_play_again;
-//
-struct pairCard* pcard;
-Card* card;
+
+
+
+void mainCard(User* user)
+
+{
+
+    GtkBuilder* builder;
+
+
+   // card=cardconstructor(card,,"./rsc/pokemon.p);
+    // we must first click the button then show
+
+    // flipCard(card);
+    pcard=(struct pairCard *)malloc(sizeof(struct pairCard));
+
+    pcard->cardMatch1=(char *)malloc(50*sizeof(char));
+    pcard->cardMatch2=(char *)malloc(50*sizeof(char));
+    pcard->cardMatch1=NULL;
+    pcard->cardMatch2=NULL;
+    pcard->card_1=newCard();
+    pcard->card_2=newCard();
+    builder=gtk_builder_new_from_file ("rsc/glade/gameboard.glade");
+
+    //runing state widgets
+    window=GTK_WIDGET(gtk_builder_get_object(builder,"gameWindow"));
+    lbl_score = GTK_WIDGET(gtk_builder_get_object(builder,"lbl_score"));
+    lbl_player = GTK_WIDGET(gtk_builder_get_object(builder,"lbl_player"));
+    gtk_label_set_text(GTK_LABEL(lbl_player),user->username);
+
+    //wining state widgets
+    window_win=GTK_WIDGET(gtk_builder_get_object(builder,"window_win"));
+    lbl_win_score=GTK_WIDGET(gtk_builder_get_object(builder,"lbl_win_score"));
+
+    //game over state widgets
+     window_lose = GTK_WIDGET(gtk_builder_get_object(builder,"window_lose"));
+     lbl_lose_score = GTK_WIDGET(gtk_builder_get_object(builder,"lbl_lose_score"));
+     btn_play_again = GTK_WIDGET(gtk_builder_get_object(builder,"btn_play_again"));
+
+
+    for(int i=0;i<16;i++)
+    {
+        buttons[i]=GTK_WIDGET(gtk_builder_get_object(builder,cardID[i]));
+    }
+    shuffling();
+    for(int i=0;i<16;i++)
+    {
+        images[i]=gtk_image_new_from_file(backCardImagePath[i]);
+    }
+    for(int i=0;i<16;i++)
+    {
+        imagesFront[i]=gtk_image_new_from_file("rsc/pokemon.png");
+    }
+
+    initBoard();
+    for(int i=0;i<16;i++)
+    {
+         g_signal_connect(buttons[i],"clicked",G_CALLBACK(clickButton),NULL);
+    }
+    g_signal_connect(btn_play_again,"clicked",G_CALLBACK(play_again),user);
+
+    gtk_widget_show_all (window);
+
+}
+
+
+
+
 //defining
-Card* newCard(void)//always remeber to release the memory space after you are done
+Card* newCard(void)
 {
     Card* a=(Card* )malloc(sizeof(Card));
     return a;
@@ -55,7 +122,6 @@ void showCard(Card *card)
         gtk_button_set_always_show_image (GTK_BUTTON(card->button),TRUE);
         g_object_ref(card->frontImage);
         gtk_button_set_image(GTK_BUTTON(card->button),card->frontImage);
-        //gtk_widget_show(card->frontImage);
 
     }
 }
@@ -159,14 +225,14 @@ void reset()
 
 gboolean check_wining()
 {
-    static int score_t=0;
-    score_t++;
-    if(score_t == 8) return TRUE;
+
+    wining_counter++;
+    if(wining_counter%8 == 0) return TRUE;
     return FALSE;
 }
-static void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 card
+void clickButton(GtkButton*button,gpointer data)// we r gonna pass address nta3 card
 {
-    static int score_int = 0;
+
     char* score_str = (char*)malloc(10*sizeof(char));
     static int trying = 0;
    // char* trying_str = (char*)malloc(2*sizeof(char));
@@ -247,7 +313,7 @@ static void clickButton(GtkButton*button,gpointer data)// we r gonna pass addres
             {
 
             printf("they didn't\n");
-	        g_timeout_add(750, hide_pcard,NULL); ///
+	        g_timeout_add(500, hide_pcard,NULL); ///
             printf("i passed the tst");
             pcard->numberOfclicks=1;
             //reset();
@@ -256,70 +322,12 @@ static void clickButton(GtkButton*button,gpointer data)// we r gonna pass addres
     }while(!pcard->numberOfclicks);
 
 }
-void mainCard(User* user)
 
-{
-
-    GtkBuilder* builder;
-
-
-   // card=cardconstructor(card,,"./rsc/pokemon.p);
-    // we must first click the button then show
-
-    // flipCard(card);
-    pcard=(struct pairCard *)malloc(sizeof(struct pairCard));
-
-    pcard->cardMatch1=(char *)malloc(50*sizeof(char));
-    pcard->cardMatch2=(char *)malloc(50*sizeof(char));
-    pcard->cardMatch1=NULL;
-    pcard->cardMatch2=NULL;
-    pcard->card_1=newCard();
-    pcard->card_2=newCard();
-    builder=gtk_builder_new_from_file ("rsc/glade/gameboard.glade");
-
-    //runing state widgets
-    window=GTK_WIDGET(gtk_builder_get_object(builder,"gameWindow"));
-    lbl_score = GTK_WIDGET(gtk_builder_get_object(builder,"lbl_score"));
-    lbl_player = GTK_WIDGET(gtk_builder_get_object(builder,"lbl_player"));
-    gtk_label_set_text(GTK_LABEL(lbl_player),user->username);
-
-    //wining state widgets
-    window_win=GTK_WIDGET(gtk_builder_get_object(builder,"window_win"));
-    lbl_win_score=GTK_WIDGET(gtk_builder_get_object(builder,"lbl_win_score"));
-
-    //game over state widgets
-     window_lose = GTK_WIDGET(gtk_builder_get_object(builder,"window_lose"));
-     lbl_lose_score = GTK_WIDGET(gtk_builder_get_object(builder,"lbl_lose_score"));
-     btn_play_again = GTK_WIDGET(gtk_builder_get_object(builder,"btn_play_again"));
-
-
-    for(int i=0;i<16;i++)
-    {
-        buttons[i]=GTK_WIDGET(gtk_builder_get_object(builder,cardID[i]));
-    }
-    shuffling();
-    for(int i=0;i<16;i++)
-    {
-        images[i]=gtk_image_new_from_file(backCardImagePath[i]);
-    }
-    for(int i=0;i<16;i++)
-    {
-        imagesFront[i]=gtk_image_new_from_file("rsc/pokemon.png");
-    }
-
-    initBoard();
-    for(int i=0;i<16;i++)
-    {
-         g_signal_connect(buttons[i],"clicked",G_CALLBACK(clickButton),NULL);
-    }
-    g_signal_connect(btn_play_again,"clicked",G_CALLBACK(play_again),user);
-
-    gtk_widget_show_all (window);
-
-}
 
 void play_again(GtkButton*button,User* user)
 {
+    wining_counter = 0;
+    score_int = 0;
     gtk_widget_hide(window_lose);
     mainCard(user);
 
