@@ -23,5 +23,7 @@ Preferbly lastest stable version
 ```
 sudo ./Match_Match_Up
 ```
+##Our  Wireframe:
+![](https://github.com/vulture990/Memory-Game/blob/main/Ourwireframe.png)
 ## Preview 
 ![](https://github.com/vulture990/Memory-Game/blob/main/2021-01-30%2018-39-37.gif)
